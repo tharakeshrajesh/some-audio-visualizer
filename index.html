@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The worst audio visualizer ever 😎</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <span class="circle" id="bass"></span>
+  <span class="circle" id="mid"></span>
+  <span class="circle" id="high"></span>
+  
+  <style>
+    html,body{height:100%} body{margin:0; background:#0b1020; transition:background .08s linear; position: relative;}
+    #ui{position:fixed; inset:auto 1rem 1rem; display:flex; gap:.5rem}
+    button{padding:.6rem 1rem; border:0; border-radius:999px; background:#1f2937; color:#e5e7eb; cursor:pointer}
+    #bass {background-color: white;}
+    #mid {background-color: red;}
+    #high {background-color: green;}
+    .circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 600px;
+        width: 600px;
+        border-radius: 50%;
+        display: inline-block; }
+  </style>
+</head>
+<body>
+  <div id="ui">
+        <button id="start">Start visualizer</button>
+        <button id="bgtoggle">Background reaction toggle - bass</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
