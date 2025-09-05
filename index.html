@@ -13,6 +13,32 @@
     html,body{height:100%} body{margin:0; background:#0b1020; transition:background .08s linear; position: relative;}
     #ui{position:fixed; inset:auto 1rem 1rem; display:flex; gap:.5rem}
     button{padding:.6rem 1rem; border:0; border-radius:999px; background:#1f2937; color:#e5e7eb; cursor:pointer}
+    #vsettingsui {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background-color: #4B6486;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      width: 180px;
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    #vsettingsui button,
+    #vsettingsui input[type="color"] {
+      width: 100%;
+      border: none;
+      border-radius: 0.5rem;
+      background: #1f2937;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    #vsettingsui input[type="color"] {padding: 0.1rem;}
+    #vsettext {font-family: "Segoe UI", "Helvetica Neue", sans-serif; font-size: 0.85rem; color: white;}
     #bass {background-color: white;}
     #mid {background-color: red;}
     #high {background-color: green;}
@@ -31,6 +57,16 @@
   <div id="ui">
         <button id="start">Start visualizer</button>
         <button id="bgtoggle">Background reaction toggle - bass</button>
+        <button id="vsettings">Visual settings</button>
+  </div>
+  <div id="vsettingsui">
+      <text id="vsettext">Bass circle color</text>
+      <input type="color" id="basscolor" value="#ffffff">
+      <text id="vsettext">Mid circle color</text>
+      <input type="color" id="midcolor" value="#ff0000">
+      <text id="vsettext">High circle color</text>
+      <input type="color" id="highcolor" value="#008000">
+      <button id="setcolor">Set values</button>
   </div>
   <script src="app.js"></script>
 </body>
