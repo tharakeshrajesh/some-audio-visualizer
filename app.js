@@ -1,8 +1,10 @@
-let ctx, analyser, data, bgstate, visualizing, perms, stream
+let ctx, analyser, data, bgstate, visualizing, perms, stream, hv, sv
 const bgstates = ["bass", "mid", "high", "off"]
 bgstate = 0
 visualizing = false
 perms = false
+hv = 200
+sv = 80
 
 alert("If you go blind or something bad happens to you from watching this then this is not my fault. This is your warning so beware.")
 
@@ -47,6 +49,28 @@ document.getElementById('setcolor').addEventListener('click', () => {
     document.getElementById('bass').setAttribute('style', `background-color: ${document.getElementById('basscolor').value}`)
     document.getElementById('mid').setAttribute('style', `background-color: ${document.getElementById('midcolor').value}`)
     document.getElementById('high').setAttribute('style', `background-color: ${document.getElementById('highcolor').value}`)
+
+    const hex = document.getElementById('bgcolor').value
+
+    let r = parseInt(hex.slice(1, 3), 16) / 255
+    let g = parseInt(hex.slice(3, 5), 16) / 255
+    let b = parseInt(hex.slice(5, 7), 16) / 255
+
+    let max = Math.max(r, g, b), min = Math.min(r, g, b)
+    let h = 0, s = 0, l = (max + min) / 2
+    let d = max - min
+
+    if (d) {
+        s = d / (1 - Math.abs(2 * l - 1))
+        if (max === r) h = ((g - b) / d) % 6
+        else if (max === g) h = (b - r) / d + 2
+        else h = (r - g) / d + 4
+        hv = Math.round(h * 60)
+        if (hv < 0) hv += 360
+    }
+
+    sv = Math.round(s * 100)
+
 })
 
 function band(db, source, destination) {
@@ -135,6 +159,6 @@ function loop() {
     document.getElementById('high').style.height = high
     document.getElementById('high').style.width = high
 
-    document.body.style.background = `hsl(200, 80%, ${bgstate == 0 ? b : bgstate == 1 ? m : bgstate == 2 ? h : 2 / 2}%)`
+    document.body.style.background = `hsl(${hv}, ${sv}%, ${bgstate == 0 ? b : bgstate == 1 ? m : bgstate == 2 ? h : 2 / 2}%)`
 
 }
